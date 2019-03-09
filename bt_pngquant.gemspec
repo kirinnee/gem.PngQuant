@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 	spec.email = ["kirinnee@gmail.com"]
 
 	spec.summary = %q{Binary Transformer plugin for PngQuant }
-	spec.homepage = "var~git~"
+	spec.homepage = "https://gitlab.com/ruby-gem/pngquant.git"
 	spec.license = "MIT"
 	
 	# Specify which files should be added to the gem when it is released.

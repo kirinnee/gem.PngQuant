@@ -5,17 +5,23 @@ stages:
 
 Unit Test:
   stage: test
+  tags:
+    - rubygem
   script:
     - bundle install
     - bundle exec rspec
 Build:
   stage: build
+  tags:
+    - rubygem
   script: gem build $GEM_NAME
   artifacts:
     paths:
       - ./*.gem
 Publish:
   stage: publish
+  tags:
+    - rubygem
   script:
     - mkdir ~/.gem
     - "echo \":rubygems_api_key: $API_KEY\" > ~/.gem/credentials"
