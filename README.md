@@ -1,6 +1,10 @@
 # PngQuant Binary Transformer
 
-Binary Transformer plugin for PngQuant 
+A Binary Transformer Plugin to compress png images.
+
+To use it, please also install gem [Binary Transformer](https://gitlab.com/ruby-gem/binary-transformer), and 
+see [usage](#Usage).
+
 
 ## Installation
 
@@ -18,7 +22,49 @@ Or install it yourself as:
 
     $ gem install bt_pngquant
 
-## Usage
+## Dependency
+
+This depends on [PngQuant](https://pngquant.org/), so please ensure its available via
+global PATH. 
+
+PngQuant has to be at least version 2.12.0
+
+To Check PngQuant version:
+```bash
+$ pngquant --verbose
+```
+
+## Getting Started
+Install and require binary transform, and create a PngQuant
+instance. The constructor can take in the following fields
+
+| Field | Description |
+| --- | --- |
+| min: | minimum quality. Default is 65 |
+| max: | Maximum quality. Default is 80 |
+| iebug: | Whether to fix ie bug, default is false |
+| speed | The speed on pngquant. Between 1 and 11. default is 3 |
+| bit | The png colorspace. Default is 256 |
+
+```ruby
+require "binary_transformer"
+require "bt_pngquant"
+
+# Read image as binary
+image = IO.binread "image.png"
+# Use binary_transformer module to allow stream-like piping
+image.extend StreamLike
+# Create a pngquant instance with the follow settings. Settings not chosen will be set default
+pngquant = BT::PngQuant.new(speed: 11) 
+
+# Pipe it through the transformer instance
+compressed = image > pngquant
+
+# Write it out
+IO.binwrite compressed 
+```
+
+This can be used in pipeline with other Binary Transformer plugins!
 
 ## Development
 
